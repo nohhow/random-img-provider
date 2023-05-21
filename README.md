@@ -12,3 +12,4 @@ resources/static/images 하위 폴더를 기준으로 End-Point를 제공하고
 요청 주소 : https://ran-img-provider.fly.dev/random-image
 
 ["귀염둥이망고"](https://ran-img-provider.fly.dev/random-image)
+<img width="150" src="https://ran-img-provider.fly.dev/random-image">
