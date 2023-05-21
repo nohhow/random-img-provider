@@ -1,6 +1,14 @@
-FROM openjdk:17
-ARG JAR_FILE=*.jar
-COPY ${JAR_FILE} app.jar
+FROM openjdk:17-alpine AS builder
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle .
+COPY src src
+RUN chmod +x ./gradlew
+RUN ./gradlew bootJar
+FROM openjdk:17-alpine
+COPY --from=builder build/libs/*.jar app.jar
+
+EXPOSE 8080
 # Set the command to run the application
-ENV PROJECT_NAME=your-project-name
-ENTRYPOINT ["java", "-jar", "build/libs/$PROJECT_NAME.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]

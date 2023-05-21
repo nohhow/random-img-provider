@@ -18,6 +18,24 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+sourceSets {
+	main {
+		resources {
+			srcDirs 'src/main/resources'
+		}
+	}
+}
+processResources {
+	duplicatesStrategy = 'include' // 중복된 파일을 포함하여 처리합니다.
+}
+
+bootJar {
+	from('src/main/resources') {
+		include '**/*'
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
